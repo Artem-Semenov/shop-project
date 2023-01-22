@@ -1,4 +1,4 @@
-type Props = {}
+type Props = {};
 
 export const List = (props: Props) => {
   return (
@@ -18,4 +18,4 @@ export const List = (props: Props) => {
       </p>
     </>
   );
-}
+};
