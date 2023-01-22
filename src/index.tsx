@@ -1,8 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-function Title() {
-  return <h1>Hello Ts</h1>;
+type TitleProps = {
+  name: string;
+  year?: number;
+  text?: string;
+};
+function Title(props: TitleProps) {
+  return <h1>Hello {props.name}</h1>;
 }
 
 function Ul() {
@@ -22,6 +27,17 @@ function Ul() {
   );
 }
 
+
+const Test = ({name, text, year}: TitleProps) => {
+  return (
+    <>
+      <h1>Year: {year}</h1>
+      <h2>{name}</h2>
+      <p>{text}</p>
+    </>
+  );
+};
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -29,8 +45,14 @@ const root = ReactDOM.createRoot(
 const App = () => {
   return (
     <div>
-      <Title />
+      <Title name="App" />
+      <Title name="React" />
+      <Title name="Ts" />
       <Ul />
+      <Test 
+      name="TS"
+      text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus nostrum mollitia excepturi quod deserunt numquam architecto nam iusto voluptatibus possimus nulla non vero sed sequi pariatur eveniet, asperiores accusantium odio!"
+      year={2022} />
     </div>
   );
 };
