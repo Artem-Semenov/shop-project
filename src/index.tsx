@@ -12,7 +12,7 @@ function Title(props: TitleProps) {
   return <h1>Hello {props.name}</h1>;
 }
 
-const Test = ({ name, text, year }: TitleProps) => {
+const Test = ({ name, text, year = 2023 }: TitleProps) => {
   return (
     <>
       <h1>Year: {year}</h1>
@@ -36,7 +36,7 @@ const App = () => {
       <Test
         name="TS"
         text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus nostrum mollitia excepturi quod deserunt numquam architecto nam iusto voluptatibus possimus nulla non vero sed sequi pariatur eveniet, asperiores accusantium odio!"
-        year={2022}
+        
       />
     </div>
   );
