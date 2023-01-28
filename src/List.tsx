@@ -16,6 +16,16 @@ export const List = (props: Props) => {
         tempora ratione, nulla commodi rerum saepe illum ipsum adipisci ipsam,
         optio cupiditate natus aut delectus voluptatum neque eius ad.
       </p>
+      <p style={{
+       color: 'red',
+       backgroundColor: 'aqua',
+       padding: '15px',
+       fontSize: '20px',
+       }}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore in sunt
+        tempora ratione, nulla commodi rerum saepe illum ipsum adipisci ipsam,
+        optio cupiditate natus aut delectus voluptatum neque eius ad.
+      </p>
     </>
   );
 };
