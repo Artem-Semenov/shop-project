@@ -1,12 +1,12 @@
-import classes from "./List.module.css";
+import  "./List.scss";
 
-console.log(classes);
+
 
 type Props = {};
 
 export const List = (props: Props) => {
-  const data = true;
-  const {test, content, ['artickle=desc'] : artickelDesc} = classes;
+  const data = false
+
 
   return (
     <>
@@ -19,18 +19,18 @@ export const List = (props: Props) => {
         <li>List item 3 </li>
       </ul>
       <p className = {`
-      ${content} 
-      ${data ? test : ''}`}>
+      content
+      ${data ? 'test' : ''}`}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore in sunt
         tempora ratione, nulla commodi rerum saepe illum ipsum adipisci ipsam,
         optio cupiditate natus aut delectus voluptatum neque eius ad.
       </p>
-      <p className = {`${content} ${data ? test : ''}`}>
+      <p className = {`content ${data ? 'test' : ''}`}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore in sunt
         tempora ratione, nulla commodi rerum saepe illum ipsum adipisci ipsam,
         optio cupiditate natus aut delectus voluptatum neque eius ad.
       </p>
-      <p className = {content}>
+      <p className = {`content`}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore in sunt
         tempora ratione, nulla commodi rerum saepe illum ipsum adipisci ipsam,
         optio cupiditate natus aut delectus voluptatum neque eius ad.
