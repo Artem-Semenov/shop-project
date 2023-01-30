@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import logo from 'assets/Logo.svg'
+
 type Props = {};
 
 const Logo = (props: Props) => {
