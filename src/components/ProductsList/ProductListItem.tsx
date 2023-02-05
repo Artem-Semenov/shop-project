@@ -27,14 +27,14 @@ state = {
     }
   
 
-onIncrementClick = () => {
+onIncrementClick = (num: number) => {
   this.setState((prevState) => ({
-    count: prevState.count + 1,
+    count: prevState.count + num,
   }))
 }
-onDecrementClick = () => {
+onDecrementClick = (num: number) => {
   this.setState((prevState) => ({
-    count: prevState.count - 1,
+    count: prevState.count - num,
   }))
 }
 
@@ -52,14 +52,14 @@ onDecrementClick = () => {
           <div className="product-features">Capacity: {capacity}gb</div>
           <div className="product-price">Price: {price}$</div>
           <div className="product-quantity">
-            <Button variant="outlined" onClick ={ this.onDecrementClick}>-</Button>
+            <Button variant="outlined" onClick ={() => this.onDecrementClick(2)}>-</Button>
             <TextField size="small" value={this.state.count}></TextField>
-            <Button variant="outlined" onClick ={this.onIncrementClick}>+</Button>
+            <Button variant="outlined" onClick ={() => this.onIncrementClick(2)}>+</Button>
           </div>
         </CardContent>
         <CardActions>
           <div className="btns-wrap">
-            <Button variant="outlined">Add to cart</Button>
+            <Button variant="contained">Add to cart</Button>
           </div>
         </CardActions>
       </Card>
