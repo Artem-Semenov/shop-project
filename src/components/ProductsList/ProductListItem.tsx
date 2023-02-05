@@ -52,9 +52,9 @@ onDecrementClick = (num: number) => {
           <div className="product-features">Capacity: {capacity}gb</div>
           <div className="product-price">Price: {price}$</div>
           <div className="product-quantity">
-            <Button variant="outlined" onClick ={() => this.onDecrementClick(2)}>-</Button>
+            <Button variant="outlined" onClick ={() => this.onDecrementClick(1)}>-</Button>
             <TextField size="small" value={this.state.count}></TextField>
-            <Button variant="outlined" onClick ={() => this.onIncrementClick(2)}>+</Button>
+            <Button variant="outlined" onClick ={() => this.onIncrementClick(1)}>+</Button>
           </div>
         </CardContent>
         <CardActions>
