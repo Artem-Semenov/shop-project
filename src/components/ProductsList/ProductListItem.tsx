@@ -7,15 +7,15 @@ type Props = {
   desc: string,
   price: number;
 };
-const ProductListItem = (props: Props) => {
+const ProductListItem = ({name, type, capacity, desc, price} : Props) => {
   return (
     <Card className="product">
       <CardContent>
-        <div className="product-title">{props.name}</div>
-        <div className="product-desc">{props.desc}</div>
-        <div className="product-features">Type: {props.type}</div>
-        <div className="product-features">Capacity: {props.capacity}gb</div>
-        <div className="product-price">Price: {props.price}$</div>
+        <div className="product-title">{name}</div>
+        <div className="product-desc">{desc}</div>
+        <div className="product-features">Type: {type}</div>
+        <div className="product-features">Capacity: {capacity}gb</div>
+        <div className="product-price">Price: {price}$</div>
       </CardContent>
       <CardActions>
         <div className="btns-wrap">
