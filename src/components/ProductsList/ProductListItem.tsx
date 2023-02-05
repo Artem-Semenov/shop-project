@@ -1,26 +1,40 @@
-import { Button, Card, CardActions, CardContent, TextField } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  TextField,
+} from "@mui/material";
 import "./ProductListItem.scss";
-import { Component } from 'react'
+import { Component } from "react";
 
 type Props = {
   name: string;
   type: string;
   capacity: number;
-  desc: string,
-  price: number,
-  image: string,
+  desc: string;
+  price: number;
+  image: string;
 };
 
+type State = {
+  count: number;
+};
 
-class ProductListItem extends Component <Props> {
-  
-  render () {
-    const {name, type, capacity, desc, price, image} = this.props;
+class ProductListItem extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      count: 1,
+    }
+  }
+  render() {
+    const { name, type, capacity, desc, price, image } = this.props;
     return (
       <Card className="product">
         <CardContent>
           <div className="product-image">
-            <img src={image} alt=""/>
+            <img src={image} alt="" />
           </div>
           <div className="product-title">{name}</div>
           <div className="product-desc">{desc}</div>
@@ -29,7 +43,7 @@ class ProductListItem extends Component <Props> {
           <div className="product-price">Price: {price}$</div>
           <div className="product-quantity">
             <Button variant="outlined">-</Button>
-            <TextField size="small" value='1'></TextField>
+            <TextField size="small" value={this.state.count}></TextField>
             <Button variant="outlined">+</Button>
           </div>
         </CardContent>
