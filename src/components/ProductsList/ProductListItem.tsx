@@ -26,14 +26,25 @@ const ProductListItem = ({
   image,
 }: Props) => {
   const [count, setCount] = useState<number>(1);
+  const [color, setColor] = useState<string>("green");
 
-const onIncrement = () => {
-  setCount((prevState) => prevState + 1)
-}
-const onDecrement = () => {
-  setCount((prevState) => prevState - 1)
-}
-
+  const onIncrement = (num: number) => {
+    setCount((prevState) => prevState + num);
+  };
+  const onDecrement = (num: number) => {
+    setCount((prevState) => prevState - num);
+  };
+  const changeColor = () => {
+    setColor((prev) =>
+      prev === "green"
+        ? "pink"
+        : prev === "pink"
+        ? "blue"
+        : prev === "blue"
+        ? "purple"
+        : "green"
+    );
+  };
   return (
     <Card className="product">
       <CardContent>
@@ -44,17 +55,25 @@ const onDecrement = () => {
         <div className="product-desc">{desc}</div>
         <div className="product-features">Type: {type}</div>
         <div className="product-features">Capacity: {capacity}gb</div>
+        <div>
+          <span style={{ color: color }}>Color: {color}</span>
+        </div>
+        <button onClick={() => changeColor()}>Change color</button>
         <div className="product-price">Price: {price}$</div>
         <div className="product-quantity">
           <Button
             variant="outlined"
-            onClick={() => onDecrement()}
+            onClick={() => onDecrement(1)}
             disabled={count <= 1}
           >
             -
           </Button>
           <TextField size="small" value={count}></TextField>
-          <Button variant="outlined" onClick={() => onIncrement()}>
+          <Button
+            variant="outlined"
+            onClick={() => onIncrement(2)}
+            disabled={count >= 10}
+          >
             +
           </Button>
         </div>
