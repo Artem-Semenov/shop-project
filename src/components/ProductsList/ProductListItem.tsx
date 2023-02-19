@@ -15,6 +15,7 @@ type Props = {
   desc: string;
   price: number;
   image: string;
+  setCartData: Function;
 };
 
 const ProductListItem = ({
@@ -24,14 +25,22 @@ const ProductListItem = ({
   desc,
   price,
   image,
+  setCartData,
 }: Props) => {
   const [count, setCount] = useState<number>(1);
 
-  const onIncrement = (num: number) => {
-    setCount((prevState) => prevState + num);
+  const onIncrement = () => {
+    setCount((prevState) => prevState + 1);
   };
-  const onDecrement = (num: number) => {
-    setCount((prevState) => prevState - num);
+  const onDecrement = () => {
+    setCount((prevState) => prevState - 1);
+  };
+
+  const onAddToCartClick = () => {
+    setCartData((prev: { totalCount: number; totalPrice: number }) => ({
+      totalCount: prev.totalCount + count,
+      totalPrice: prev.totalPrice + count * price,
+    }));
   };
 
   return (
@@ -48,7 +57,7 @@ const ProductListItem = ({
         <div className="product-quantity">
           <Button
             variant="outlined"
-            onClick={() => onDecrement(1)}
+            onClick={() => onDecrement()}
             disabled={count <= 1}
           >
             -
@@ -56,7 +65,7 @@ const ProductListItem = ({
           <TextField size="small" value={count}></TextField>
           <Button
             variant="outlined"
-            onClick={() => onIncrement(2)}
+            onClick={() => onIncrement()}
             disabled={count >= 10}
           >
             +
@@ -65,7 +74,9 @@ const ProductListItem = ({
       </CardContent>
       <CardActions>
         <div className="btns-wrap">
-          <Button variant="contained">Add to cart</Button>
+          <Button variant="contained" onClick={() => onAddToCartClick()}>
+            Add to cart
+          </Button>
         </div>
       </CardActions>
     </Card>
