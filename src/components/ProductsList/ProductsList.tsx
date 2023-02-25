@@ -22,6 +22,7 @@ const ProcutsList = ({setCartData}: Props) => {
             return (
               <Grid item xs={12} md={4} key={id}>
                 <ProductListItem
+                  id={id}
                   image={image}
                   name={name}
                   type={type}

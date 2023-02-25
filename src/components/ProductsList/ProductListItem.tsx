@@ -16,6 +16,7 @@ type Props = {
   price: number;
   image: string;
   setCartData: Function;
+  id: number
 };
 
 const ProductListItem = ({
@@ -24,6 +25,7 @@ const ProductListItem = ({
   capacity,
   desc,
   price,
+  id,
   image,
   setCartData,
 }: Props) => {
@@ -37,10 +39,15 @@ const ProductListItem = ({
   };
 
   const onAddToCartClick = () => {
-    setCartData((prev: { totalCount: number; totalPrice: number }) => ({
-      totalCount: prev.totalCount + count,
-      totalPrice: prev.totalPrice + count * price,
-    }));
+    setCartData((prev: { [id: number]: number }) => {
+      const newCartData = { ...prev };
+      if (newCartData[id]) {
+        newCartData[id] += count;
+      } else {
+        newCartData[id] = count;
+      }
+      return newCartData
+    });
   };
 
   return (
