@@ -1,13 +1,13 @@
 import { Container } from "@mui/material"
 import Home from "pages/Home/Home"
 
-type Props = {setCartData : Function}
-const Main = ({setCartData}: Props) => {
+type Props = {onAddToCartClick : Function}
+const Main = ({onAddToCartClick}: Props) => {
   return (
     <Container sx={{
       padding: '80px 0',
       }}>
-      <Home setCartData={setCartData}/>
+      <Home onAddToCartClick={onAddToCartClick}/>
     </Container>
     
   )

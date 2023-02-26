@@ -10,19 +10,32 @@ type ProductsInCartType = {
   [id: number]: number;
 };
 
+
+
 const App = () => {
  
-
   const [productsInCart, setProductsinCart] = useState<ProductsInCartType>({
-    
   });
 
+  const onAddToCartClick = (id: number, count: number) => {
+
+    setProductsinCart((prev) => {
+      const newCartData = { ...prev };
+      if (newCartData[id]) {
+        newCartData[id] += count;
+      } else {
+        newCartData[id] = count;
+      }
+      return newCartData
+    });
+  };
+  
   return (
     <>
       <StyledEngineProvider injectFirst>
         <CssBaseline />
         <Header productsInCart={productsInCart} />
-        <Main setCartData={setProductsinCart} />
+        <Main onAddToCartClick={onAddToCartClick} />
         <Footer />
       </StyledEngineProvider>
     </>

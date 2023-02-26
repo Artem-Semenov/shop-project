@@ -15,7 +15,7 @@ type Props = {
   desc: string;
   price: number;
   image: string;
-  setCartData: Function;
+  onAddToCartClick: Function;
   id: number
 };
 
@@ -27,7 +27,7 @@ const ProductListItem = ({
   price,
   id,
   image,
-  setCartData,
+  onAddToCartClick,
 }: Props) => {
   const [count, setCount] = useState<number>(1);
 
@@ -38,23 +38,13 @@ const ProductListItem = ({
     setCount((prevState) => prevState - 1);
   };
 
-  const onAddToCartClick = () => {
-    setCartData((prev: { [id: number]: number }) => {
-      const newCartData = { ...prev };
-      if (newCartData[id]) {
-        newCartData[id] += count;
-      } else {
-        newCartData[id] = count;
-      }
-      return newCartData
-    });
-  };
+ 
 
   return (
     <Card className="product">
       <CardContent>
         <div className="product-image">
-          <img src={image} alt="" />
+          <img src={image} alt={name} />
         </div>
         <div className="product-title">{name}</div>
         <div className="product-desc">{desc}</div>
@@ -81,7 +71,7 @@ const ProductListItem = ({
       </CardContent>
       <CardActions>
         <div className="btns-wrap">
-          <Button variant="contained" onClick={() => onAddToCartClick()}>
+          <Button variant="contained" onClick={() => onAddToCartClick(id, count)}>
             Add to cart
           </Button>
         </div>
