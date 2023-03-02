@@ -7,6 +7,10 @@ import { Container } from "@mui/material";
 import Home from "pages/Home/Home";
 import { Routes, Route } from "react-router-dom";
 import CartPage from "pages/CartPage/CartPage";
+import About from "pages/About/About";
+import Products from "pages/Products/Products";
+import Payment from "pages/Payment/Payment";
+import Login from "pages/Login/Login";
 
 type ProductsInCartType = {
   [id: number]: number;
@@ -41,6 +45,10 @@ const App = () => {
               path="/"
               element={<Home onAddToCartClick={onAddToCartClick} />}></Route>
             <Route path="/cart" element={<CartPage />}></Route>
+            <Route path="/about" element={<About/>}></Route>
+            <Route path="/products" element={<Products/>}></Route>
+            <Route path="/payment" element={<Payment/>}></Route>
+            <Route path="/login" element={<Login/>}></Route>
           </Routes>
         </Container>
         <Footer />
