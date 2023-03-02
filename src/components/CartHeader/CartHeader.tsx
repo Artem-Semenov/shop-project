@@ -19,8 +19,7 @@ const CartHeader = ({
             {productsObject[parseInt(el)].name} : {productsInCart[parseInt(el)]}
           </div>
         ))}
-      </div>
-      <div>
+        <div>
         Total: $
         {Object.keys(productsInCart).reduce((acc, el) => {
           return (
@@ -29,6 +28,8 @@ const CartHeader = ({
           );
         }, 0)}
       </div>
+      </div>
+      
     </>
   );
 };
