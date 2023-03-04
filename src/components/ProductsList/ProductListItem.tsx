@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import "./ProductListItem.scss";
 import { useState } from "react";
+import Quantity from "Quantity/Quantity";
 
 type Props = {
   name: string;
@@ -51,23 +52,9 @@ const ProductListItem = ({
         <div className="product-features">Type: {type}</div>
         <div className="product-features">Capacity: {capacity}gb</div>
         <div className="product-price">Price: {price}$</div>
-        <div className="product-quantity">
-          <Button
-            variant="outlined"
-            onClick={() => onDecrement()}
-            disabled={count <= 1}
-          >
-            -
-          </Button>
-          <TextField size="small" value={count}></TextField>
-          <Button
-            variant="outlined"
-            onClick={() => onIncrement()}
-            disabled={count >= 10}
-          >
-            +
-          </Button>
-        </div>
+        
+         <Quantity onIncrement={onIncrement} onDecrement={onDecrement} count={count}/>
+        
       </CardContent>
       <CardActions>
         <div className="btns-wrap">
