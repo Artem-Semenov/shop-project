@@ -11,6 +11,7 @@ import About from "pages/About/About";
 import Products from "pages/Products/Products";
 import Payment from "pages/Payment/Payment";
 import Login from "pages/Login/Login";
+import { omit } from "lodash";
 
 type ProductsInCartType = {
   [id: number]: number;
@@ -38,7 +39,7 @@ const App = () => {
         newCartData[id] -= 1;
       } 
       if (newCartData[id] < 1) {
-        delete newCartData[id]
+      return omit(prev, id)
       }
       return newCartData;
     });

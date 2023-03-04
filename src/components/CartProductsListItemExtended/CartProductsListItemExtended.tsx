@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 type Props = {
   product: Product
   productCount: number
-  onRemoveProductFromCart: Function
+  onRemoveProductFromCart: (id: number) => void
 };
 const CartProductsListItemExtended = ({product, productCount, onRemoveProductFromCart}: Props) => {
 
