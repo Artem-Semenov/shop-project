@@ -6,18 +6,20 @@ type Props = {
   productsInCart: {
     [id: number]: number;
   };
+  onRemoveProductFromCart: Function
 };
 
-const CartPage = ({ productsInCart }: Props) => {
+const CartPage = ({ productsInCart, onRemoveProductFromCart }: Props) => {
   return (
     <>
       <Typography variant="h4" component="h1">
         Cart
       </Typography>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} sx={{marginTop: 0}}>
         <CartProductsList
           productsInCart={productsInCart}
           CartItem={CartProductsListItemExtended}
+          onRemoveProductFromCart = {onRemoveProductFromCart}
         />
       </Grid>
       <CartTotal productsInCart={productsInCart} />

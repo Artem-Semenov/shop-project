@@ -31,6 +31,19 @@ const App = () => {
     });
   };
 
+  const onRemoveProductFromCart = (id: number) => {
+    setProductsinCart((prev) => {
+      const newCartData = { ...prev };
+      if (newCartData[id]) {
+        newCartData[id] -= 1;
+      } 
+      if (newCartData[id] < 1) {
+        delete newCartData[id]
+      }
+      return newCartData;
+    });
+  }
+
   return (
     <>
       <StyledEngineProvider injectFirst>
@@ -44,7 +57,7 @@ const App = () => {
             <Route
               path="/"
               element={<Home onAddToCartClick={onAddToCartClick} />}></Route>
-            <Route path="/cart" element={<CartPage productsInCart={productsInCart} />}></Route>
+            <Route path="/cart" element={<CartPage productsInCart={productsInCart} onRemoveProductFromCart={onRemoveProductFromCart} />} ></Route>
             <Route path="/about" element={<About/>}></Route>
             <Route path="/products" element={<Products/>}></Route>
             <Route path="/payment" element={<Payment/>}></Route>
