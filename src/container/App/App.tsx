@@ -44,7 +44,7 @@ const App = () => {
             <Route
               path="/"
               element={<Home onAddToCartClick={onAddToCartClick} />}></Route>
-            <Route path="/cart" element={<CartPage />}></Route>
+            <Route path="/cart" element={<CartPage productsInCart={productsInCart} />}></Route>
             <Route path="/about" element={<About/>}></Route>
             <Route path="/products" element={<Products/>}></Route>
             <Route path="/payment" element={<Payment/>}></Route>
