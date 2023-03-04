@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import CartProductsList from "components/CartProductsList/CartProductsList";
 import CartTotal from "components/CartTotal/CartTotal";
 import productsArray, { getProductsObject, Product } from "utils/productsArray";
 
@@ -15,17 +16,11 @@ const CartPage = ({
 }: Props) => {
   return (
     <>
-    <Typography variant="h4" component="h1">
-      Cart
-    </Typography>
-      <div>
-        {Object.keys(productsInCart).map((el, i) => (
-          <div key={i}>
-            {productsObject[parseInt(el)].name} : {productsInCart[parseInt(el)]}
-          </div>
-        ))}
-        <CartTotal productsInCart={productsInCart}/>
-      </div>
+      <Typography variant="h4" component="h1">
+        Cart
+      </Typography>
+      <CartProductsList productsInCart={productsInCart} />
+      <CartTotal productsInCart={productsInCart} />
     </>
   );
 };
