@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import "./ProductListItem.scss";
 import { useState } from "react";
+import Quantity from "Quantity/Quantity";
 
 type Props = {
   name: string;
@@ -15,7 +16,8 @@ type Props = {
   desc: string;
   price: number;
   image: string;
-  setCartData: Function;
+  onAddToCartClick: Function;
+  id: number
 };
 
 const ProductListItem = ({
@@ -24,8 +26,9 @@ const ProductListItem = ({
   capacity,
   desc,
   price,
+  id,
   image,
-  setCartData,
+  onAddToCartClick,
 }: Props) => {
   const [count, setCount] = useState<number>(1);
 
@@ -36,45 +39,26 @@ const ProductListItem = ({
     setCount((prevState) => prevState - 1);
   };
 
-  const onAddToCartClick = () => {
-    setCartData((prev: { totalCount: number; totalPrice: number }) => ({
-      totalCount: prev.totalCount + count,
-      totalPrice: prev.totalPrice + count * price,
-    }));
-  };
+ 
 
   return (
     <Card className="product">
       <CardContent>
         <div className="product-image">
-          <img src={image} alt="" />
+          <img src={image} alt={name} />
         </div>
         <div className="product-title">{name}</div>
         <div className="product-desc">{desc}</div>
         <div className="product-features">Type: {type}</div>
         <div className="product-features">Capacity: {capacity}gb</div>
         <div className="product-price">Price: {price}$</div>
-        <div className="product-quantity">
-          <Button
-            variant="outlined"
-            onClick={() => onDecrement()}
-            disabled={count <= 1}
-          >
-            -
-          </Button>
-          <TextField size="small" value={count}></TextField>
-          <Button
-            variant="outlined"
-            onClick={() => onIncrement()}
-            disabled={count >= 10}
-          >
-            +
-          </Button>
-        </div>
+        
+         <Quantity onIncrement={onIncrement} onDecrement={onDecrement} count={count}/>
+        
       </CardContent>
       <CardActions>
         <div className="btns-wrap">
-          <Button variant="contained" onClick={() => onAddToCartClick()}>
+          <Button variant="contained" onClick={() => onAddToCartClick(id, count)}>
             Add to cart
           </Button>
         </div>

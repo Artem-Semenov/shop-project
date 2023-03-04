@@ -1,10 +1,10 @@
 import ProductsList from 'components/ProductsList/ProductsList'
 
-type Props = {setCartData:Function}
-const Home = ({setCartData}: Props) => {
+type Props = {onAddToCartClick:Function}
+const Home = ({onAddToCartClick}: Props) => {
   return (
    <>
-   <ProductsList setCartData={setCartData}/>
+   <ProductsList onAddToCartClick={onAddToCartClick}/>
    </>
     
   )
