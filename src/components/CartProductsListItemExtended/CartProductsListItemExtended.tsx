@@ -7,9 +7,10 @@ import { useState } from "react";
 type Props = {
   product: Product
   productCount: number
-  onRemoveProductFromCart: (id: number) => void
+  onRemoveProductFromCart: (id: number, count: number) => void
 };
 const CartProductsListItemExtended = ({product, productCount, onRemoveProductFromCart}: Props) => {
+  
   const [count, setCount] = useState<number>(1);
 
   const onIncrement = () => {
@@ -31,7 +32,7 @@ const CartProductsListItemExtended = ({product, productCount, onRemoveProductFro
           <p>Count: {productCount}</p>
           <Quantity onIncrement={onIncrement} onDecrement={onDecrement} count={count}/>
           <br/>
-          <Button variant="outlined" onClick={() => onRemoveProductFromCart(product.id)}>
+          <Button variant="outlined" onClick={() => onRemoveProductFromCart(product.id, count)}>
             <DeleteIcon/>
           </Button>
         </CardContent>

@@ -32,11 +32,11 @@ const App = () => {
     });
   };
 
-  const onRemoveProductFromCart = (id: number) => {
+  const onRemoveProductFromCart = (id: number, count: number) => {
     setProductsinCart((prev) => {
       const newCartData = { ...prev };
       if (newCartData[id]) {
-        newCartData[id] -= 1;
+        newCartData[id] -= count;
       } 
       if (newCartData[id] < 1) {
       return omit(prev, id)

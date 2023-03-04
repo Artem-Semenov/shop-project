@@ -7,7 +7,7 @@ type Props = {
   };
   productsObject?: { [id: number]: Product };
   CartItem?: any;
-  onRemoveProductFromCart?: (id: number) => void
+  onRemoveProductFromCart?: (id: number, count: number) => void
 };
 const CartProductsList = ({
   productsInCart,
