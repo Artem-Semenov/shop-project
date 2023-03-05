@@ -7,12 +7,14 @@ type Props = {
   };
   productsObject?: { [id: number]: Product };
   CartItem?: any;
-  onRemoveProductFromCart?: (id: number, count: number) => void
+  onChangeProductCountInCart?: (id: number, count: number) => void
+  onRemoveProductFromCart?: (id: number) => void
 };
 const CartProductsList = ({
   productsInCart,
   productsObject = getProductsObject(productsArray),
   CartItem = CartProductsListItem,
+  onChangeProductCountInCart,
   onRemoveProductFromCart
 }: Props) => {
   return (
@@ -22,6 +24,7 @@ const CartProductsList = ({
         key={i}
         product={productsObject[parseInt(el)]} 
         productCount={productsInCart[parseInt(el)]}
+        onChangeProductCountInCart = {onChangeProductCountInCart}
         onRemoveProductFromCart = {onRemoveProductFromCart}/>
         
       ))}

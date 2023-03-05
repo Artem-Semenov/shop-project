@@ -32,11 +32,15 @@ const App = () => {
     });
   };
 
-  const onRemoveProductFromCart = (id: number, count: number) => {
+  const onRemoveProductFromCart = (id: number) => {
+    setProductsinCart(prev => omit(prev, id))
+  }
+
+  const onChangeProductCountInCart = (id: number, count: number) => {
     setProductsinCart((prev) => {
       const newCartData = { ...prev };
       if (newCartData[id]) {
-        newCartData[id] -= count;
+        newCartData[id] = count;
       } 
       if (newCartData[id] < 1) {
       return omit(prev, id)
@@ -58,7 +62,9 @@ const App = () => {
             <Route
               path="/"
               element={<Home onAddToCartClick={onAddToCartClick} />}></Route>
-            <Route path="/cart" element={<CartPage productsInCart={productsInCart} onRemoveProductFromCart={onRemoveProductFromCart} />} ></Route>
+            <Route path="/cart" element={<CartPage productsInCart={productsInCart}
+             onChangeProductCountInCart={onChangeProductCountInCart} 
+             onRemoveProductFromCart = {onRemoveProductFromCart}/>} ></Route>
             <Route path="/about" element={<About/>}></Route>
             <Route path="/products" element={<Products/>}></Route>
             <Route path="/payment" element={<Payment/>}></Route>

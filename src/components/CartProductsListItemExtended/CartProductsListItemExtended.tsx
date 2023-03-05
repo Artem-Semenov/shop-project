@@ -7,18 +7,11 @@ import { useState } from "react";
 type Props = {
   product: Product
   productCount: number
-  onRemoveProductFromCart: (id: number, count: number) => void
+  onRemoveProductFromCart: (id: number) => void
+  onChangeProductCountInCart: (id: number, count: number) => void
 };
-const CartProductsListItemExtended = ({product, productCount, onRemoveProductFromCart}: Props) => {
-  
-  const [count, setCount] = useState<number>(1);
+const CartProductsListItemExtended = ({product, productCount, onChangeProductCountInCart, onRemoveProductFromCart}: Props) => {
 
-  const onIncrement = () => {
-    setCount((prevState) => prevState + 1);
-  };
-  const onDecrement = () => {
-    setCount((prevState) => prevState - 1);
-  };
   return (
     <Grid item xs={12} sm={4}>
       <Card variant="outlined">
@@ -30,9 +23,13 @@ const CartProductsListItemExtended = ({product, productCount, onRemoveProductFro
           <div>{product.name}</div>
           <p>Price for one item: {product.price}</p>
           <p>Count: {productCount}</p>
-          <Quantity onIncrement={onIncrement} onDecrement={onDecrement} count={count}/>
+          <Quantity onIncrement={() => onChangeProductCountInCart(product.id, productCount + 1)} 
+          onDecrement={() => onChangeProductCountInCart(product.id, productCount - 1 )}
+           count={productCount} 
+           minCount = {0}/>
+           
           <br/>
-          <Button variant="outlined" onClick={() => onRemoveProductFromCart(product.id, count)}>
+          <Button variant="outlined" onClick={() => onRemoveProductFromCart(product.id)}>
             <DeleteIcon/>
           </Button>
         </CardContent>
