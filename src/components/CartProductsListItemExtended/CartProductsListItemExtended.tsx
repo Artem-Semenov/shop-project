@@ -1,7 +1,7 @@
 import {CardContent, Card, Grid, Button} from "@mui/material";
 import { Product } from "utils/productsArray";
 import DeleteIcon from '@mui/icons-material/Delete';
-import Quantity from "Quantity/Quantity";
+import Quantity from "components/Quantity/Quantity";
 import { useState } from "react";
 
 type Props = {

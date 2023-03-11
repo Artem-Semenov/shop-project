@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import "./ProductListItem.scss";
 import { useState } from "react";
-import Quantity from "Quantity/Quantity";
+import Quantity from "components/Quantity/Quantity";
 
 type Props = {
   name: string;
