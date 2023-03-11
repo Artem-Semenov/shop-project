@@ -2,7 +2,7 @@ import Footer from "container/Footer/Footer";
 import Header from "container/Header/Header";
 import { StyledEngineProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useState } from "react";
+import { useState, createContext } from "react";
 import { Container } from "@mui/material";
 import Home from "pages/Home/Home";
 import { Routes, Route } from "react-router-dom";
@@ -20,6 +20,20 @@ type ProductsInCartType = {
 type LikedProducts = {
   [id: number] : boolean
 }
+
+
+
+
+type Context = {
+  productsLike: {
+    [id: number] : boolean
+  },
+  onRemoveProductFromCart: (id: number) => void
+}
+
+export const myContext = createContext<Context | null>(null)
+
+
 const App = () => {
   const [productsInCart, setProductsinCart] = useState<ProductsInCartType>({});
 
@@ -65,6 +79,10 @@ const App = () => {
     <>
       <StyledEngineProvider injectFirst>
         <CssBaseline />
+        <myContext.Provider value={{
+          productsLike,
+          onRemoveProductFromCart
+        }}>
         <Header productsInCart={productsInCart} />
         <Container
           sx={{
@@ -79,8 +97,8 @@ const App = () => {
             onSetLikedProduct = {onSetLikedProduct}/>}
             ></Route>
             <Route path="/cart" element={<CartPage productsInCart={productsInCart}
-             onChangeProductCountInCart={onChangeProductCountInCart} 
-             onRemoveProductFromCart = {onRemoveProductFromCart}/>} ></Route>
+             onChangeProductCountInCart={onChangeProductCountInCart}
+             />} ></Route>
             <Route path="/about" element={<About/>}></Route>
             <Route path="/products" element={<Products/>}></Route>
             <Route path="/payment" element={<Payment/>}></Route>
@@ -88,6 +106,7 @@ const App = () => {
           </Routes>
         </Container>
         <Footer />
+        </myContext.Provider>
       </StyledEngineProvider>
     </>
   );
