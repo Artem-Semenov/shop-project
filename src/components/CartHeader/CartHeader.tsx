@@ -1,18 +1,16 @@
 import CartProductsList from "components/CartProductsList/CartProductsList";
 import CartTotal from "components/CartTotal/CartTotal";
+import { myContext } from "container/App/App";
+import { useContext } from "react";
 
-type Props = {
-  productsInCart: {
-    [id: number]: number;
-  };
-};
 
-const CartHeader = ({ productsInCart }: Props) => {
+
+const CartHeader = () => {
   return (
     <>
       <div>
-        <CartProductsList productsInCart={productsInCart} />
-        <CartTotal productsInCart={productsInCart} />
+        <CartProductsList />
+        <CartTotal/>
       </div>
     </>
   );

@@ -1,24 +1,23 @@
+import { myContext } from "container/App/App";
+import { useContext } from "react";
 import productsArray, { getProductsObject, Product } from "utils/productsArray";
 
 type Props = {
-  productsInCart: {
-    [id: number]: number;
-  };
   productsObject?: { [id: number]: Product };
 };
 const CartTotal = ({
-  productsInCart,
   productsObject = getProductsObject(productsArray),
 }: Props) => {
+  const context = useContext(myContext)
   return (
     <div>
           Total: $
-          {Object.keys(productsInCart).reduce((acc, el) => {
+          {context?.productsInCart ? Object.keys(context?.productsInCart).reduce((acc, el) => {
             return (
               acc +
-              productsObject[parseInt(el)].price * productsInCart[parseInt(el)]
+              productsObject[parseInt(el)].price * context?.productsInCart[parseInt(el)]
             );
-          }, 0)}
+          }, 0) : ''}
         </div>
   )
 }

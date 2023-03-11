@@ -1,31 +1,30 @@
 import CartProductsListItem from "components/CartProductsListItem/CartProductsListItem";
+import { myContext } from "container/App/App";
+import { useContext } from "react";
 import productsArray, { getProductsObject, Product } from "utils/productsArray";
 
 type Props = {
-  productsInCart: {
-    [id: number]: number;
-  };
   productsObject?: { [id: number]: Product };
   CartItem?: any;
-  onChangeProductCountInCart?: (id: number, count: number) => void
 };
+
+
 const CartProductsList = ({
-  productsInCart,
   productsObject = getProductsObject(productsArray),
   CartItem = CartProductsListItem,
-  onChangeProductCountInCart
 }: Props) => {
+  const context = useContext(myContext)
+
   return (
     <>
-      {Object.keys(productsInCart).map((el, i) => (
+      {context?.productsInCart ? Object.keys(context?.productsInCart).map((el, i) => (
         <CartItem
         key={i}
         product={productsObject[parseInt(el)]} 
-        productCount={productsInCart[parseInt(el)]}
-        onChangeProductCountInCart = {onChangeProductCountInCart}
+        productCount={context?.productsInCart[parseInt(el)]}
         />
         
-      ))}
+      )) : ''}
     </>
   );
 };

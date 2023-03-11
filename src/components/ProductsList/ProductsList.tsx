@@ -1,48 +1,39 @@
-import { Grid, Typography } from "@mui/material";
-import ProductListItem from "./ProductListItem";
-import productsArray from "utils/productsArray";
+import { Grid, Typography } from '@mui/material'
+import ProductListItem from './ProductListItem'
+import productsArray from 'utils/productsArray'
 
-type Props = {
-  onAddToCartClick: Function
-  productsLike: {[id: number] : boolean}
-  onSetLikedProduct: (id: number) => void
-};
+const ProcutsList = () => {
+    return (
+        <>
+            <Typography
+                variant="h3"
+                component="div"
+                align="center"
+                sx={{ marginBottom: '38px' }}
+            >
+                List of products
+            </Typography>
 
-const ProcutsList = ({onAddToCartClick, productsLike, onSetLikedProduct}: Props) => {
-  return (
-    <>
-      <Typography
-        variant="h3"
-        component="div"
-        align="center"
-        sx={{ marginBottom: "38px" }}
-      >
-        List of products
-      </Typography>
-
-      <Grid container spacing={4}>
-        {productsArray.map(
-          ({ name, type, capacity, desc, price, id, image }) => {
-            return (
-              <Grid item xs={12} md={4} key={id}>
-                <ProductListItem
-                  id={id}
-                  image={image}
-                  name={name}
-                  type={type}
-                  desc={desc}
-                  price={price}
-                  capacity={capacity}
-                  onAddToCartClick = {onAddToCartClick}
-                  isLiked = {productsLike[id] ?? false}
-                  onSetLikedProduct = {onSetLikedProduct}
-                />
-              </Grid>
-            );
-          }
-        )}
-      </Grid>
-    </>
-  );
-};
-export default ProcutsList;
+            <Grid container spacing={4}>
+                {productsArray.map(
+                    ({ name, type, capacity, desc, price, id, image }) => {
+                        return (
+                            <Grid item xs={12} md={4} key={id}>
+                                <ProductListItem
+                                    id={id}
+                                    image={image}
+                                    name={name}
+                                    type={type}
+                                    desc={desc}
+                                    price={price}
+                                    capacity={capacity}
+                                />
+                            </Grid>
+                        )
+                    }
+                )}
+            </Grid>
+        </>
+    )
+}
+export default ProcutsList

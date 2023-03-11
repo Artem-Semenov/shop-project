@@ -2,24 +2,19 @@ import { CardContent, Card, Grid, Button } from '@mui/material'
 import { Product } from 'utils/productsArray'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Quantity from 'components/Quantity/Quantity'
-import { useContext, useState } from 'react'
+import { useContext} from 'react'
 import { myContext } from 'container/App/App'
 
 type Props = {
     product: Product
     productCount: number
-    onChangeProductCountInCart: (id: number, count: number) => void
 }
 const CartProductsListItemExtended = ({
     product,
-    productCount,
-    onChangeProductCountInCart
+    productCount
 }: Props) => {
 
-  const data = useContext(myContext)
-
-  console.log(data)
-
+  const context = useContext(myContext)
 
     return (
         <Grid item xs={12} sm={4}>
@@ -33,13 +28,13 @@ const CartProductsListItemExtended = ({
                     <p>Count: {productCount}</p>
                     <Quantity
                         onIncrement={() =>
-                            onChangeProductCountInCart(
+                            context?.onChangeProductCountInCart(
                                 product.id,
                                 productCount + 1
                             )
                         }
                         onDecrement={() =>
-                            onChangeProductCountInCart(
+                          context?.onChangeProductCountInCart(
                                 product.id,
                                 productCount - 1
                             )
@@ -51,7 +46,7 @@ const CartProductsListItemExtended = ({
                     <br />
                     <Button
                         variant="outlined"
-                        onClick={() => data?.onRemoveProductFromCart(product.id)}
+                        onClick={() => context?.onRemoveProductFromCart(product.id)}
                     >
                         <DeleteIcon />
                     </Button>
