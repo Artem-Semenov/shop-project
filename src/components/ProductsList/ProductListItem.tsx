@@ -19,8 +19,10 @@ type Props = {
   price: number;
   image: string;
   onAddToCartClick: Function;
-  id: number
-};
+  id: number;
+  isLiked?: boolean;
+  onSetLikedProduct: (id: number) => void
+}
 
 const ProductListItem = ({
   name,
@@ -31,6 +33,8 @@ const ProductListItem = ({
   id,
   image,
   onAddToCartClick,
+  isLiked = false,
+  onSetLikedProduct
 }: Props) => {
   const [count, setCount] = useState<number>(1);
 
@@ -41,12 +45,10 @@ const ProductListItem = ({
     setCount((prevState) => prevState - 1);
   };
 
- const isLiked = false;
-
   return (
     <Card className="product">
       <CardContent>
-        <Button variant="outlined">
+        <Button variant="outlined" onClick={() => onSetLikedProduct(id)}>
           {isLiked ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
         </Button>
         <div className="product-image">

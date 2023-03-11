@@ -2,9 +2,13 @@ import { Grid, Typography } from "@mui/material";
 import ProductListItem from "./ProductListItem";
 import productsArray from "utils/productsArray";
 
-type Props = {onAddToCartClick: Function};
+type Props = {
+  onAddToCartClick: Function
+  productsLike: {[id: number] : boolean}
+  onSetLikedProduct: (id: number) => void
+};
 
-const ProcutsList = ({onAddToCartClick}: Props) => {
+const ProcutsList = ({onAddToCartClick, productsLike, onSetLikedProduct}: Props) => {
   return (
     <>
       <Typography
@@ -30,6 +34,8 @@ const ProcutsList = ({onAddToCartClick}: Props) => {
                   price={price}
                   capacity={capacity}
                   onAddToCartClick = {onAddToCartClick}
+                  isLiked = {productsLike[id] ?? false}
+                  onSetLikedProduct = {onSetLikedProduct}
                 />
               </Grid>
             );

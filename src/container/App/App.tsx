@@ -17,6 +17,9 @@ type ProductsInCartType = {
   [id: number]: number;
 };
 
+type LikedProducts = {
+  [id: number] : boolean
+}
 const App = () => {
   const [productsInCart, setProductsinCart] = useState<ProductsInCartType>({});
 
@@ -49,6 +52,15 @@ const App = () => {
     });
   }
 
+  const [productsLike, setProductsLike] = useState<LikedProducts>({})
+
+  const onSetLikedProduct = (id: number) => {
+    setProductsLike((prev) => ({
+      ...prev,
+      [id] : !prev[id]
+    }))
+  }
+
   return (
     <>
       <StyledEngineProvider injectFirst>
@@ -61,7 +73,11 @@ const App = () => {
           <Routes>
             <Route
               path="/"
-              element={<Home onAddToCartClick={onAddToCartClick} />}></Route>
+              element={
+            <Home onAddToCartClick={onAddToCartClick}
+            productsLike = {productsLike}
+            onSetLikedProduct = {onSetLikedProduct}/>}
+            ></Route>
             <Route path="/cart" element={<CartPage productsInCart={productsInCart}
              onChangeProductCountInCart={onChangeProductCountInCart} 
              onRemoveProductFromCart = {onRemoveProductFromCart}/>} ></Route>
