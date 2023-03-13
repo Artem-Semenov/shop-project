@@ -47,23 +47,19 @@ const ProductListItem = ({
 
     const dispatchLike = useAppDispatch()
 
-    console.log(productsLike)
-
     return (
         <Card className="product">
             <CardContent>
                 <Button
                     variant="outlined"
-                    onClick={() => dispatchLike({
-                        type: "TOGGLE_LIKE",
-                        id
-                    })}
+                    onClick={() =>
+                        dispatchLike({
+                            type: 'TOGGLE_LIKE',
+                            id,
+                        })
+                    }
                 >
-                    {productsLike ? (
-                        <FavoriteIcon />
-                    ) : (
-                        <FavoriteBorderIcon />
-                    )}
+                    {productsLike ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                 </Button>
                 <div className="product-image">
                     <img src={image} alt={name} />
