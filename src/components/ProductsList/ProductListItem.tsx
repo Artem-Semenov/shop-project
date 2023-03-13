@@ -11,7 +11,7 @@ import Quantity from 'components/Quantity/Quantity'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { myContext } from 'container/App/App'
-import { useAppSelector } from 'redux/hooks'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
 
 type Props = {
     name: string
@@ -44,6 +44,9 @@ const ProductListItem = ({
     const context = useContext(myContext)
 
     const productsLike = useAppSelector((state) => state.productsLike[id])
+
+    const dispatchLike = useAppDispatch()
+
     console.log(productsLike)
 
     return (
@@ -51,7 +54,10 @@ const ProductListItem = ({
             <CardContent>
                 <Button
                     variant="outlined"
-                    onClick={() => context?.onSetLikedProduct(id)}
+                    onClick={() => dispatchLike({
+                        type: "TOGGLE_LIKE",
+                        id
+                    })}
                 >
                     {productsLike ? (
                         <FavoriteIcon />
