@@ -5,8 +5,7 @@ type ProductsLike = {
 }
 
 export const initialState: ProductsLike = {
-    2: true,
-    3: true,
+
 }
 
 /* export const likeSlice = createSlice({
@@ -29,8 +28,6 @@ const likeReducer = (state = initialState, action: AnyAction) => {
         default:
             return state
     }
-
-    return state
 }
 
 export default likeReducer
