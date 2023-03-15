@@ -12,7 +12,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { myContext } from 'container/App/App'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
-import { addLike, removeLike } from 'redux/likeReducer'
+import { toggleLike } from 'redux/likeReducer'
 
 type Props = {
     name: string
@@ -53,9 +53,8 @@ const ProductListItem = ({
             <CardContent>
                 <Button
                     variant="outlined"
-                    onClick={() => isLiked ? dispatch(removeLike(id)) : dispatch(addLike(id))
-                        }
-                    
+                    onClick={() =>  dispatch(toggleLike(id))
+                        }   
                 >
                     {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                 </Button>
@@ -67,7 +66,6 @@ const ProductListItem = ({
                 <div className="product-features">Type: {type}</div>
                 <div className="product-features">Capacity: {capacity}gb</div>
                 <div className="product-price">Price: {price}$</div>
-
                 <Quantity
                     onIncrement={onIncrement}
                     onDecrement={onDecrement}

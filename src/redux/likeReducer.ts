@@ -12,18 +12,14 @@ export const initialState: ProductsLike = {
     name: 'like',
     initialState: initialState,
     reducers: {
-        addLike: (state, action) => ({
+        toggleLike: (state, action) => ({
             ...state,
-            [action.payload] : true
-        }),
-        removeLike: (state, action) => ({
-            ...state,
-            [action.payload] : false
+            [action.payload] : !state[action.payload]
         }),
     },
 })
 
-export const {addLike, removeLike} = likeSlice.actions
+export const {toggleLike} = likeSlice.actions
 export default likeSlice.reducer 
 
 /* const likeReducer = (state = initialState, action: AnyAction) => {
