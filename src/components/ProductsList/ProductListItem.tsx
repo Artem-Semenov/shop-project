@@ -11,6 +11,8 @@ import Quantity from 'components/Quantity/Quantity'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { myContext } from 'container/App/App'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { toggleLike } from 'redux/likeReducer'
 
 type Props = {
     name: string
@@ -42,18 +44,19 @@ const ProductListItem = ({
 
     const context = useContext(myContext)
 
+    const isLiked = useAppSelector((state) => state.productsLike[id])
+
+    const dispatch = useAppDispatch()
+
     return (
         <Card className="product">
             <CardContent>
                 <Button
                     variant="outlined"
-                    onClick={() => context?.onSetLikedProduct(id)}
+                    onClick={() =>  dispatch(toggleLike(id))
+                        }   
                 >
-                    {context?.productsLike[id] ? (
-                        <FavoriteIcon />
-                    ) : (
-                        <FavoriteBorderIcon />
-                    )}
+                    {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                 </Button>
                 <div className="product-image">
                     <img src={image} alt={name} />
@@ -63,7 +66,6 @@ const ProductListItem = ({
                 <div className="product-features">Type: {type}</div>
                 <div className="product-features">Capacity: {capacity}gb</div>
                 <div className="product-price">Price: {price}$</div>
-
                 <Quantity
                     onIncrement={onIncrement}
                     onDecrement={onDecrement}
