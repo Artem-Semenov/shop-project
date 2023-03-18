@@ -2,24 +2,34 @@ import { CardContent, Card, Grid, Button } from '@mui/material'
 import { Product } from 'utils/productsArray'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Quantity from 'components/Quantity/Quantity'
-import { useContext} from 'react'
+import { useContext } from 'react'
 import { myContext } from 'container/App/App'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { toggleLike } from 'redux/likeReducer'
 
 type Props = {
     product: Product
     productCount: number
 }
-const CartProductsListItemExtended = ({
-    product,
-    productCount
-}: Props) => {
+const CartProductsListItemExtended = ({ product, productCount}: Props) => {
+    const context = useContext(myContext)
 
-  const context = useContext(myContext)
+    const isLiked = useAppSelector((state) => state.productsLike[product.id])
+
+    const dispatch = useAppDispatch()
 
     return (
         <Grid item xs={12} sm={4}>
             <Card variant="outlined">
                 <CardContent>
+                    <Button
+                        variant="outlined"
+                        onClick={() => dispatch(toggleLike(product.id))}
+                    >
+                        {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                    </Button>
                     <div className="product-image">
                         <img src={product.image} alt={product.name} />
                     </div>
@@ -34,7 +44,7 @@ const CartProductsListItemExtended = ({
                             )
                         }
                         onDecrement={() =>
-                          context?.onChangeProductCountInCart(
+                            context?.onChangeProductCountInCart(
                                 product.id,
                                 productCount - 1
                             )
@@ -46,7 +56,9 @@ const CartProductsListItemExtended = ({
                     <br />
                     <Button
                         variant="outlined"
-                        onClick={() => context?.onRemoveProductFromCart(product.id)}
+                        onClick={() =>
+                            context?.onRemoveProductFromCart(product.id)
+                        }
                     >
                         <DeleteIcon />
                     </Button>
