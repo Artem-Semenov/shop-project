@@ -3,14 +3,12 @@ import {
     Card,
     CardActions,
     CardContent,
-    TextField,
 } from '@mui/material'
 import './ProductListItem.scss'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import Quantity from 'components/Quantity/Quantity'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { myContext } from 'container/App/App'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { toggleLike } from 'redux/likeReducer'
 
@@ -42,13 +40,10 @@ const ProductListItem = ({
         setCount((prevState) => prevState - 1)
     }
 
-    const context = useContext(myContext)
 
     const isLiked = useAppSelector((state) => state.productsLike[id])
 
     const dispatch = useAppDispatch()
-
-    const onAddProductToCartClick = useAppDispatch()
 
     return (
         <Card className="product">

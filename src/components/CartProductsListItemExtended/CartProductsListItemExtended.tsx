@@ -2,8 +2,6 @@ import { CardContent, Card, Grid, Button } from '@mui/material'
 import { Product } from 'utils/productsArray'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Quantity from 'components/Quantity/Quantity'
-import { useContext } from 'react'
-import { myContext } from 'container/App/App'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
@@ -13,9 +11,8 @@ type Props = {
     product: Product
     productCount: number
 }
-const CartProductsListItemExtended = ({ product, productCount}: Props) => {
-    const context = useContext(myContext)
-
+const CartProductsListItemExtended = ({ product, productCount }: Props) => {
+    
     const isLiked = useAppSelector((state) => state.productsLike[product.id])
 
     const dispatch = useAppDispatch()
@@ -38,19 +35,21 @@ const CartProductsListItemExtended = ({ product, productCount}: Props) => {
                     <p>Count: {productCount}</p>
                     <Quantity
                         onIncrement={() =>
-                            context?.onChangeProductCountInCart(
-                                product.id,
-                                productCount + 1
-                            )
+                            dispatch({
+                                type: 'CHANGE_PRODUCT_QUANTITY',
+                                id: product.id,
+                                count: productCount + 1,
+                            })
                         }
-                        onDecrement={() =>
-                            context?.onChangeProductCountInCart(
-                                product.id,
-                                productCount - 1
-                            )
-                        }
+                        onDecrement={() => {
+                            dispatch({
+                                type: 'CHANGE_PRODUCT_QUANTITY',
+                                id: product.id,
+                                count: productCount - 1,
+                            })
+                        }}
                         count={productCount}
-                        minCount={0}
+                        minCount={1}
                     />
 
                     <br />

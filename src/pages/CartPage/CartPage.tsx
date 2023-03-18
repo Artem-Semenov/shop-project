@@ -7,7 +7,9 @@ import { useAppSelector } from "redux/hooks";
 
 
 const CartPage = () => {
+
   const productsInCart = useAppSelector(state => state.productsInCart)
+
   return (
     <>
       <Typography variant="h4" component="h1">
@@ -16,7 +18,7 @@ const CartPage = () => {
       <Grid container spacing={4} sx={{marginTop: 0}}>
         <CartProductsList
         productsInCart = {productsInCart}
-          CartItem={CartProductsListItemExtended}
+        CartItem={CartProductsListItemExtended}
         />
       </Grid>
       <CartTotal productsInCart = {productsInCart}/>
