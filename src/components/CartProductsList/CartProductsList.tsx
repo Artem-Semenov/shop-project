@@ -6,22 +6,24 @@ import productsArray, { getProductsObject, Product } from "utils/productsArray";
 type Props = {
   productsObject?: { [id: number]: Product };
   CartItem?: any;
+  productsInCart: any
 };
 
 
 const CartProductsList = ({
   productsObject = getProductsObject(productsArray),
   CartItem = CartProductsListItem,
+  productsInCart
 }: Props) => {
   const context = useContext(myContext)
 
   return (
     <>
-      {context?.productsInCart ? Object.keys(context?.productsInCart).map((el, i) => (
+      {productsInCart ? Object.keys(productsInCart).map((el, i) => (
         <CartItem
         key={i}
         product={productsObject[parseInt(el)]} 
-        productCount={context?.productsInCart[parseInt(el)]}
+        productCount={productsInCart[parseInt(el)]}
         />
         
       )) : ''}
