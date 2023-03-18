@@ -48,6 +48,8 @@ const ProductListItem = ({
 
     const dispatch = useAppDispatch()
 
+    const onAddProductToCartClick = useAppDispatch()
+
     return (
         <Card className="product">
             <CardContent>
@@ -77,7 +79,12 @@ const ProductListItem = ({
                 <div className="btns-wrap">
                     <Button
                         variant="contained"
-                        onClick={() => context?.onAddToCartClick(id, count)}
+                        onClick={() => dispatch({
+                            type: 'ADD_PRODUCT_TO_CART',
+                            id,
+                            count
+                        })
+                    }
                     >
                         Add to cart
                     </Button>
