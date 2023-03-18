@@ -21,6 +21,7 @@ export const {cartReducer} = cartSlice.actions
 export default cartSlice.reducer */
 
 import { AnyAction } from '@reduxjs/toolkit'
+import { omit } from 'lodash'
 
 type ProductsCart = {
     [id: number]: number
@@ -34,7 +35,11 @@ const cartReducer = (state = initialState, action: AnyAction) => {
                 ...state,
                 [action.id]: state[action.id] || 0 + action.count,
             }
+            break
         }
+        case 'REMOVE_PRODUCT_FROM_CART':
+            return omit(state, action.id)
+            break
         default:
             return state
     }

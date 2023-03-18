@@ -5,7 +5,6 @@ type Props = {
   product: Product;
 };
 const CartProductsListItem = ({ product, productCount }: Props) => {
-  console.log(product)
   return (
     <div>
       {product.name} : {productCount}

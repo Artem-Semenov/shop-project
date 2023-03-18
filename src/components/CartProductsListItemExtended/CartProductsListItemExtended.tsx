@@ -57,7 +57,10 @@ const CartProductsListItemExtended = ({ product, productCount}: Props) => {
                     <Button
                         variant="outlined"
                         onClick={() =>
-                            context?.onRemoveProductFromCart(product.id)
+                            dispatch({
+                                type: 'REMOVE_PRODUCT_FROM_CART',
+                                id: product.id,
+                            })
                         }
                     >
                         <DeleteIcon />
