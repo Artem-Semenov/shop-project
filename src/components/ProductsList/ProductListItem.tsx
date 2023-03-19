@@ -3,16 +3,16 @@ import {
     Card,
     CardActions,
     CardContent,
-    TextField,
 } from '@mui/material'
 import './ProductListItem.scss'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import Quantity from 'components/Quantity/Quantity'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { myContext } from 'container/App/App'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { toggleLike } from 'redux/likeReducer'
+import {addProductToCart} from 'redux/cartReducer'
+import { Link } from 'react-router-dom'
 
 type Props = {
     name: string
@@ -42,7 +42,6 @@ const ProductListItem = ({
         setCount((prevState) => prevState - 1)
     }
 
-    const context = useContext(myContext)
 
     const isLiked = useAppSelector((state) => state.productsLike[id])
 
@@ -61,7 +60,7 @@ const ProductListItem = ({
                 <div className="product-image">
                     <img src={image} alt={name} />
                 </div>
-                <div className="product-title">{name}</div>
+                <div className="product-title"><Link to={`/products/${id}`}>{name}</Link></div>
                 <div className="product-desc">{desc}</div>
                 <div className="product-features">Type: {type}</div>
                 <div className="product-features">Capacity: {capacity}gb</div>
@@ -77,7 +76,8 @@ const ProductListItem = ({
                 <div className="btns-wrap">
                     <Button
                         variant="contained"
-                        onClick={() => context?.onAddToCartClick(id, count)}
+                        onClick={() => dispatch(addProductToCart({id, count}))
+                    }
                     >
                         Add to cart
                     </Button>

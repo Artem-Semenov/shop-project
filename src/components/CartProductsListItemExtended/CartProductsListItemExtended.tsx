@@ -2,24 +2,32 @@ import { CardContent, Card, Grid, Button } from '@mui/material'
 import { Product } from 'utils/productsArray'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Quantity from 'components/Quantity/Quantity'
-import { useContext} from 'react'
-import { myContext } from 'container/App/App'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { toggleLike } from 'redux/likeReducer'
+import { changeProductQuantity, removeProductFromCart } from 'redux/cartReducer'
 
 type Props = {
     product: Product
     productCount: number
 }
-const CartProductsListItemExtended = ({
-    product,
-    productCount
-}: Props) => {
+const CartProductsListItemExtended = ({ product, productCount }: Props) => {
+    
+    const isLiked = useAppSelector((state) => state.productsLike[product.id])
 
-  const context = useContext(myContext)
+    const dispatch = useAppDispatch()
 
     return (
         <Grid item xs={12} sm={4}>
             <Card variant="outlined">
                 <CardContent>
+                    <Button
+                        variant="outlined"
+                        onClick={() => dispatch(toggleLike(product.id))}
+                    >
+                        {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                    </Button>
                     <div className="product-image">
                         <img src={product.image} alt={product.name} />
                     </div>
@@ -28,25 +36,27 @@ const CartProductsListItemExtended = ({
                     <p>Count: {productCount}</p>
                     <Quantity
                         onIncrement={() =>
-                            context?.onChangeProductCountInCart(
-                                product.id,
-                                productCount + 1
-                            )
+                            dispatch(changeProductQuantity({
+                                id: product.id,
+                                count: productCount + 1,
+                            }))
                         }
-                        onDecrement={() =>
-                          context?.onChangeProductCountInCart(
-                                product.id,
-                                productCount - 1
-                            )
-                        }
+                        onDecrement={() => {
+                            dispatch(changeProductQuantity({
+                                id: product.id,
+                                count: productCount - 1,
+                            }))
+                        }}
                         count={productCount}
-                        minCount={0}
+                        minCount={1}
                     />
 
                     <br />
                     <Button
                         variant="outlined"
-                        onClick={() => context?.onRemoveProductFromCart(product.id)}
+                        onClick={() =>
+                            dispatch(removeProductFromCart(product.id))
+                        }
                     >
                         <DeleteIcon />
                     </Button>
