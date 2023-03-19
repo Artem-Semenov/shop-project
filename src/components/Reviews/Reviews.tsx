@@ -1,5 +1,7 @@
 import { Button, TextareaAutosize, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
+import { MouseEvent, useState } from 'react'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { addReview } from 'redux/reviewsReducer'
 import './Reviews.scss'
 type Props = {}
 
@@ -9,45 +11,43 @@ type Review = {
 }
 
 const Reviews = (props: Props) => {
-    const arrReviews: Review[] = [
-        {
-            name: 'Христина',
-            text: 'Покупкою задоволена на всі 100!!!! Гарний дизайн, приємний колір, легкий, зручно поміщається в жіночій руці.',
-        },
-        {
-            name: 'Тарас',
-            text: 'Швидка доставка.Телефон Працює бездогано 10/10',
-        },
-    ]
-
-    const [reviews, setReviews] = useState<Review[]>(arrReviews)
-
     const [newReview, setNewReview] = useState<Review>({
         name: '',
         text: '',
     })
-    const handleName = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+    const handleName = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         setNewReview((prev) => ({
             ...prev,
             name: e.target.value,
         }))
     }
+
     const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setNewReview((prev) => ({
             ...prev,
-           text: e.target.value,
+            text: e.target.value,
         }))
     }
- 
-    const onSendReviewClick = (e:React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setReviews((arrReviews) => [...arrReviews, newReview])
-      setNewReview({
-        name: '',
-        text: '',
-    })
-  }
 
+    const dispatch = useAppDispatch()
+
+    const onSendReviewClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        if (newReview.name === '' || newReview.text === '') {
+            alert('all fields are required')
+        } else {
+            dispatch(addReview(newReview))
+            setNewReview({
+                name: '',
+                text: '',
+            })
+        }
+    }
+
+    const reviews = useAppSelector((state) => state.reviews)
 
     return (
         <>
@@ -76,10 +76,11 @@ const Reviews = (props: Props) => {
                     </div>
                 )
             })}
-            <form onSubmit={(e) => onSendReviewClick(e)}>
+            <form>
                 <h3>Please leave review</h3>
                 <div>
                     <TextField
+                        required
                         label={'name'}
                         value={newReview.name}
                         onChange={(e) => handleName(e)}
@@ -94,7 +95,10 @@ const Reviews = (props: Props) => {
                         onChange={(e) => handleText(e)}
                     />
                 </div>
-                <Button type={'submit'} variant={'outlined'}
+                <Button
+                    type={'submit'}
+                    variant={'outlined'}
+                    onClick={(e) => onSendReviewClick(e)}
                 >
                     Send
                 </Button>
