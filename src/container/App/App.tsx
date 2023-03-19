@@ -10,6 +10,7 @@ import About from 'pages/About/About'
 import Products from 'pages/Products/Products'
 import Payment from 'pages/Payment/Payment'
 import Login from 'pages/Login/Login'
+import ProductsPage from 'pages/ProductPage/ProductsPage'
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
                         <Route path="/products" element={<Products />}></Route>
                         <Route path="/payment" element={<Payment />}></Route>
                         <Route path="/login" element={<Login />}></Route>
+                        <Route path ="/products/:id" element ={<ProductsPage />}></Route>
                     </Routes>
                 </Container>
                 <Footer />
