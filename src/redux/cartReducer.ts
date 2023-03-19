@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
 export const {cartReducer} = cartSlice.actions
 export default cartSlice.reducer */
 
-import { AnyAction } from '@reduxjs/toolkit'
+import { AnyAction, createSlice } from '@reduxjs/toolkit'
 import { omit } from 'lodash'
 
 type ProductsCart = {
@@ -28,7 +28,29 @@ type ProductsCart = {
 }
 export const initialState: ProductsCart = {}
 
-const cartReducer = (state = initialState, action: AnyAction) => {
+
+
+export const cartSlice = createSlice({
+    name: 'productsInCart',
+    initialState: initialState,
+    reducers: {
+         addProductToCart: (state, action) => ({
+            ...state,
+            [action.payload.id]: (state[action.payload.id] || 0) + action.payload.count,
+        }),
+        
+        removeProductFromCart: (state, action) => omit(state, action.payload),
+        
+        changeProductQuantity: (state, action) => ({
+            ...state,
+            [action.payload.id]: action.payload.count,
+        })
+    }
+})
+
+export const {addProductToCart, removeProductFromCart, changeProductQuantity} = cartSlice.actions
+export default cartSlice.reducer
+/* const cartReducer = (state = initialState, action: AnyAction) => {
     switch (action.type) {
         case 'ADD_PRODUCT_TO_CART':
             {
@@ -52,4 +74,4 @@ const cartReducer = (state = initialState, action: AnyAction) => {
     }
 }
 
-export default cartReducer
+export default cartReducer */

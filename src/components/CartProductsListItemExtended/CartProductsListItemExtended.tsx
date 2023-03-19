@@ -6,6 +6,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { toggleLike } from 'redux/likeReducer'
+import { changeProductQuantity, removeProductFromCart } from 'redux/cartReducer'
 
 type Props = {
     product: Product
@@ -35,18 +36,16 @@ const CartProductsListItemExtended = ({ product, productCount }: Props) => {
                     <p>Count: {productCount}</p>
                     <Quantity
                         onIncrement={() =>
-                            dispatch({
-                                type: 'CHANGE_PRODUCT_QUANTITY',
+                            dispatch(changeProductQuantity({
                                 id: product.id,
                                 count: productCount + 1,
-                            })
+                            }))
                         }
                         onDecrement={() => {
-                            dispatch({
-                                type: 'CHANGE_PRODUCT_QUANTITY',
+                            dispatch(changeProductQuantity({
                                 id: product.id,
                                 count: productCount - 1,
-                            })
+                            }))
                         }}
                         count={productCount}
                         minCount={1}
@@ -56,10 +55,7 @@ const CartProductsListItemExtended = ({ product, productCount }: Props) => {
                     <Button
                         variant="outlined"
                         onClick={() =>
-                            dispatch({
-                                type: 'REMOVE_PRODUCT_FROM_CART',
-                                id: product.id,
-                            })
+                            dispatch(removeProductFromCart(product.id))
                         }
                     >
                         <DeleteIcon />
