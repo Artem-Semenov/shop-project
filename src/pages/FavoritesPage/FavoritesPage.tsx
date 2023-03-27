@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { toggleLike } from 'redux/likeReducer'
 import productsArray, { getProductsObject, Product } from 'utils/productsArray'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import { useState } from 'react'
 
 type Props = {
     productsObject?: {
@@ -20,6 +21,8 @@ const FavoritesPage = ({
     const filteredObject = Object.fromEntries(
         Object.entries(favoriteProducts).filter((el) => el[1] === true)
     )
+
+    const [isPopupOpen, setIsPopupOpen] = useState<boolean>(true)
 
     console.log(filteredObject)
 
@@ -56,6 +59,20 @@ const FavoritesPage = ({
                     </Grid>
                 ))}
             </Grid>
+
+            {isPopupOpen && (
+                <div className="popup">
+                    <div className="popup__body">
+                        <Title> Hello Popup</Title>
+                        <Button
+                            variant="outlined"
+                            onClick={() => setIsPopupOpen(false)}
+                        >
+                            Close
+                        </Button>
+                    </div>
+                </div>
+            )}
         </>
     )
 }
