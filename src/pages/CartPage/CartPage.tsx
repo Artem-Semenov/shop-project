@@ -1,7 +1,8 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import CartProductsList from "components/CartProductsList/CartProductsList";
 import CartProductsListItemExtended from "components/CartProductsListItemExtended/CartProductsListItemExtended";
 import CartTotal from "components/CartTotal/CartTotal";
+import Title from "components/Title/Title";
 import { useAppSelector } from "redux/hooks";
 
 
@@ -12,9 +13,9 @@ const CartPage = () => {
 
   return (
     <>
-      <Typography variant="h4" component="h1">
-        Cart
-      </Typography>
+     <Title>
+      Cart
+     </Title>
       <Grid container spacing={4} sx={{marginTop: 0}}>
         <CartProductsList
         productsInCart = {productsInCart}

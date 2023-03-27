@@ -11,7 +11,7 @@ import Products from 'pages/Products/Products'
 import Payment from 'pages/Payment/Payment'
 import Login from 'pages/Login/Login'
 import ProductsPage from 'pages/ProductPage/ProductsPage'
-
+import FavoritesPage from 'pages/FavoritesPage/FavoritesPage'
 
 const App = () => {
     return (
@@ -32,7 +32,14 @@ const App = () => {
                         <Route path="/products" element={<Products />}></Route>
                         <Route path="/payment" element={<Payment />}></Route>
                         <Route path="/login" element={<Login />}></Route>
-                        <Route path ="/products/:id" element ={<ProductsPage />}></Route>
+                        <Route
+                            path="/products/:id"
+                            element={<ProductsPage />}
+                        ></Route>
+                        <Route
+                            path="/favorites"
+                            element={<FavoritesPage />}
+                        ></Route>
                     </Routes>
                 </Container>
                 <Footer />
