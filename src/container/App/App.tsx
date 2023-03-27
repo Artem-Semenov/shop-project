@@ -12,6 +12,7 @@ import Payment from 'pages/Payment/Payment'
 import Login from 'pages/Login/Login'
 import ProductsPage from 'pages/ProductPage/ProductsPage'
 import FavoritesPage from 'pages/FavoritesPage/FavoritesPage'
+import CheckoutPage from 'pages/CheckoutPage/CheckoutPage'
 
 const App = () => {
     return (
@@ -39,6 +40,10 @@ const App = () => {
                         <Route
                             path="/favorites"
                             element={<FavoritesPage />}
+                        ></Route>
+                        <Route
+                            path="/checkout"
+                            element={<CheckoutPage />}
                         ></Route>
                     </Routes>
                 </Container>
