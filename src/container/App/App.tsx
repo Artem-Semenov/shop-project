@@ -13,8 +13,15 @@ import Login from 'pages/Login/Login'
 import ProductsPage from 'pages/ProductPage/ProductsPage'
 import FavoritesPage from 'pages/FavoritesPage/FavoritesPage'
 import CheckoutPage from 'pages/CheckoutPage/CheckoutPage'
+import { useEffect } from 'react'
+import { useAppDispatch } from 'redux/hooks'
+import { fetchProducts } from 'redux/productsReducer'
 
 const App = () => {
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(fetchProducts())
+    }, [dispatch])
     return (
         <>
             <StyledEngineProvider injectFirst>
