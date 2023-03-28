@@ -1,6 +1,11 @@
 import { Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
+import { useAppSelector } from 'redux/hooks'
 import productsArray, { getProductsObject, Product } from 'utils/productsArray'
+
+type ProductsObject = {
+    [id: number]: Product
+}
 
 type Props = {
     productsObject?: {
@@ -8,21 +13,22 @@ type Props = {
     }
 }
 const ProductsPage = ({
-    productsObject = getProductsObject(productsArray),
 }: Props) => {
     const { id } = useParams()
 
-    const product = productsObject[parseInt(id!)]
-    console.log(product)
+    const products = useAppSelector((state) => state.products)
+    const productsObject: ProductsObject = getProductsObject(products)
 
+    const product = productsObject[parseInt(id!)]
+    
     return (
         <>
             <Typography variant="h4" component="h1">
-                {product.name}
+                {product.title}
             </Typography>
             <p
                 dangerouslySetInnerHTML={{
-                    __html: product.fullDesc!,
+                    __html: product.description!,
                 }}
             ></p>
         </>

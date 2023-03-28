@@ -15,20 +15,20 @@ import {addProductToCart} from 'redux/cartReducer'
 import { Link } from 'react-router-dom'
 
 type Props = {
-    name: string
+    title: string
     type: string
     capacity: number
-    desc: string
+    description: string
     price: number
     image: string
     id: number
 }
 
 const ProductListItem = ({
-    name,
+    title,
     type,
     capacity,
-    desc,
+    description,
     price,
     id,
     image,
@@ -58,10 +58,10 @@ const ProductListItem = ({
                     {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                 </Button>
                 <div className="product-image">
-                    <img src={image} alt={name} />
+                    <img src={image} alt={title} />
                 </div>
-                <div className="product-title"><Link to={`/products/${id}`}>{name}</Link></div>
-                <div className="product-desc">{desc}</div>
+                <div className="product-title"><Link to={`/products/${id}`}>{title}</Link></div>
+                <div className="product-desc">{description}</div>
                 <div className="product-features">Type: {type}</div>
                 <div className="product-features">Capacity: {capacity}gb</div>
                 <div className="product-price">Price: {price}$</div>

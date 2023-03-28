@@ -19,6 +19,7 @@ import { fetchProducts } from 'redux/productsReducer'
 
 const App = () => {
     const dispatch = useAppDispatch()
+    
     useEffect(() => {
         dispatch(fetchProducts())
     }, [dispatch])

@@ -13,7 +13,6 @@ type Props = {
     productCount: number
 }
 const CartProductsListItemExtended = ({ product, productCount }: Props) => {
-    
     const isLiked = useAppSelector((state) => state.productsLike[product.id])
 
     const dispatch = useAppDispatch()
@@ -29,23 +28,27 @@ const CartProductsListItemExtended = ({ product, productCount }: Props) => {
                         {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                     </Button>
                     <div className="product-image">
-                        <img src={product.image} alt={product.name} />
+                        <img src={product.image} alt={product.title} />
                     </div>
-                    <div>{product.name}</div>
+                    <div>{product.title}</div>
                     <p>Price for one item: {product.price}</p>
                     <p>Count: {productCount}</p>
                     <Quantity
                         onIncrement={() =>
-                            dispatch(changeProductQuantity({
-                                id: product.id,
-                                count: productCount + 1,
-                            }))
+                            dispatch(
+                                changeProductQuantity({
+                                    id: product.id,
+                                    count: productCount + 1,
+                                })
+                            )
                         }
                         onDecrement={() => {
-                            dispatch(changeProductQuantity({
-                                id: product.id,
-                                count: productCount - 1,
-                            }))
+                            dispatch(
+                                changeProductQuantity({
+                                    id: product.id,
+                                    count: productCount - 1,
+                                })
+                            )
                         }}
                         count={productCount}
                         minCount={1}

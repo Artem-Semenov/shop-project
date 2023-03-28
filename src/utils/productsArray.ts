@@ -1,20 +1,20 @@
 export type Product = {
-    name: string
+    title: string
     type: string
     capacity: number
-    desc: string
+    description: string
     price: number
     id: number
     image: string
-    fullDesc?: string
+    fulldescription?: string
 }
 
 const productsArray: Product[] = [
     {
         id: 15,
-        name: 'Iphone Pro',
-        fullDesc: '<div class="red">prefect phone</div>',
-        desc: 'prefect phone',
+        title: 'Iphone Pro',
+        fulldescription: '<div class="red">prefect phone</div>',
+        description: 'prefect phone',
         price: 1440,
         capacity: 256,
         type: 'phone',
@@ -22,8 +22,8 @@ const productsArray: Product[] = [
     },
     {
         id: 2,
-        name: 'Samsung 12 Pro',
-        desc: 'another phone another phone',
+        title: 'Samsung 12 Pro',
+        description: 'another phone another phone',
         price: 899,
         capacity: 256,
         type: 'phone',
@@ -31,8 +31,8 @@ const productsArray: Product[] = [
     },
     {
         id: 3,
-        name: 'Samsung Not Pro',
-        desc: 'also phone another phone another phone',
+        title: 'Samsung Not Pro',
+        description: 'also phone another phone another phone',
         price: 200,
         capacity: 256,
         type: 'phone',
@@ -40,8 +40,8 @@ const productsArray: Product[] = [
     },
     {
         id: 4,
-        name: 'Iphone 10 Pro',
-        desc: 'prefect phone',
+        title: 'Iphone 10 Pro',
+        description: 'prefect phone',
         price: 1440,
         capacity: 456,
         type: 'phone',
@@ -49,8 +49,8 @@ const productsArray: Product[] = [
     },
     {
         id: 5,
-        name: 'Samsung Pro',
-        desc: 'another phone another phone',
+        title: 'Samsung Pro',
+        description: 'another phone another phone',
         price: 599,
         capacity: 256,
         type: 'phone',
@@ -58,8 +58,8 @@ const productsArray: Product[] = [
     },
     {
         id: 10,
-        name: 'Samsung 14 Pro',
-        desc: 'also phone another phone another phone',
+        title: 'Samsung 14 Pro',
+        description: 'also phone another phone another phone',
         price: 600,
         capacity: 256,
         type: 'phone',

@@ -2,9 +2,13 @@ import { Button, Card, CardContent, Grid } from '@mui/material'
 import Title from 'components/Title/Title'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { toggleLike } from 'redux/likeReducer'
-import productsArray, { getProductsObject, Product } from 'utils/productsArray'
+import { getProductsObject, Product } from 'utils/productsArray'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useState } from 'react'
+
+type ProductsObject = {
+    [id: number]: Product
+}
 
 type Props = {
     productsObject?: {
@@ -12,12 +16,13 @@ type Props = {
     }
 }
 
-const FavoritesPage = ({
-    productsObject = getProductsObject(productsArray),
-}: Props) => {
-    const favoriteProducts = useAppSelector((state) => state.productsLike)
-    console.log(favoriteProducts)
+const FavoritesPage = ({}: Props) => {
 
+    const products = useAppSelector((state) => state.products)
+    const productsObject: ProductsObject = getProductsObject(products)
+
+    const favoriteProducts = useAppSelector((state) => state.productsLike)
+    
     const filteredObject = Object.fromEntries(
         Object.entries(favoriteProducts).filter((el) => el[1] === true)
     )
@@ -45,14 +50,14 @@ const FavoritesPage = ({
                                 <div className="product-image">
                                     <img
                                         src={productsObject[parseInt(el)].image}
-                                        alt={productsObject[parseInt(el)].name}
+                                        alt={productsObject[parseInt(el)].title}
                                     />
                                 </div>
                                 <div className="product-title">
-                                    {productsObject[parseInt(el)].name}
+                                    {productsObject[parseInt(el)].title}
                                 </div>
                                 <div className="product-desc">
-                                    {productsObject[parseInt(el)].desc}
+                                    {productsObject[parseInt(el)].description}
                                 </div>
                             </CardContent>
                         </Card>
