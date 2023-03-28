@@ -30,21 +30,21 @@ const CheckoutPage = (props: Props) => {
     const sendOrder = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
         axios
-            .post(
-                'https://my-json-server.typicode.com/kznkv-skillup/server/orders',
-                {
+            .post('http://localhost:1337/api/orders', {
+                data: {
                     name: orderData.name,
                     address: orderData.address,
-                }
-            )
-            .then((res) => res.data)
-            .then(({ name, address }) => {
+                },
+            })
+            .then((res) => console.log(res.data.data.attributes))
+            /* .then(({ name, address }) => {
                 setorderData({
                     name,
                     address,
                 })
                 setIsOrderSent(true)
-            })
+            }) */
+            .catch((er) => console.log(er))
     }
     const renderForm = () => {
         return (
