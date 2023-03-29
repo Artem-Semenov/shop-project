@@ -1,6 +1,5 @@
 import CartProductsList from "components/CartProductsList/CartProductsList";
 import CartTotal from "components/CartTotal/CartTotal";
-import { useContext } from "react";
 import { useAppSelector } from "redux/hooks";
 
 const CartHeader = () => {

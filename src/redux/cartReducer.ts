@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
 export const {cartReducer} = cartSlice.actions
 export default cartSlice.reducer */
 
-import { AnyAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { omit } from 'lodash'
 
 type ProductsCart = {

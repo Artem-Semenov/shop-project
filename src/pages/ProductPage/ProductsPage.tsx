@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { useAppSelector } from 'redux/hooks'
-import productsArray, { getProductsObject, Product } from 'utils/productsArray'
+import { getProductsObject, Product } from 'utils/productsArray'
 
 type ProductsObject = {
     [id: number]: Product
@@ -12,8 +12,7 @@ type Props = {
         [id: number]: Product
     }
 }
-const ProductsPage = ({
-}: Props) => {
+const ProductsPage = (props: Props) => {
     const { id } = useParams()
 
     const products = useAppSelector((state) => state.products)

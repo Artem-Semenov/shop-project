@@ -1,5 +1,5 @@
 import { Button, TextareaAutosize, TextField, Typography } from '@mui/material'
-import React, { MouseEvent, useState } from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { addReview } from 'redux/reviewsReducer'
 import './Reviews.scss'
@@ -16,9 +16,7 @@ const Reviews = (props: Props) => {
         text: '',
     })
 
-    const handleName = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewReview((prev) => ({
             ...prev,
             name: e.target.value,
@@ -95,10 +93,7 @@ const Reviews = (props: Props) => {
                         onChange={handleText}
                     />
                 </div>
-                <Button
-                    type={'submit'}
-                    variant={'outlined'}
-                >
+                <Button type={'submit'} variant={'outlined'}>
                     Send
                 </Button>
             </form>
