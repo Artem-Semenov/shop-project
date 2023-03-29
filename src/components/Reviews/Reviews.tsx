@@ -1,5 +1,5 @@
 import { Button, TextareaAutosize, TextField, Typography } from '@mui/material'
-import { MouseEvent, useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { addReview } from 'redux/reviewsReducer'
 import './Reviews.scss'
@@ -17,7 +17,7 @@ const Reviews = (props: Props) => {
     })
 
     const handleName = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement>
     ) => {
         setNewReview((prev) => ({
             ...prev,
@@ -34,7 +34,7 @@ const Reviews = (props: Props) => {
 
     const dispatch = useAppDispatch()
 
-    const onSendReviewClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const onSendReviewClick = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (newReview.name === '' || newReview.text === '') {
             alert('all fields are required')
@@ -76,14 +76,14 @@ const Reviews = (props: Props) => {
                     </div>
                 )
             })}
-            <form>
+            <form onSubmit={onSendReviewClick}>
                 <h3>Please leave review</h3>
                 <div>
                     <TextField
                         required
                         label={'name'}
                         value={newReview.name}
-                        onChange={(e) => handleName(e)}
+                        onChange={handleName}
                     />
                 </div>
                 <br />
@@ -92,13 +92,12 @@ const Reviews = (props: Props) => {
                         minRows={7}
                         placeholder={'Your message'}
                         value={newReview.text}
-                        onChange={(e) => handleText(e)}
+                        onChange={handleText}
                     />
                 </div>
                 <Button
                     type={'submit'}
                     variant={'outlined'}
-                    onClick={(e) => onSendReviewClick(e)}
                 >
                     Send
                 </Button>

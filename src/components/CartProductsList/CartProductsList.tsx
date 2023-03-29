@@ -1,8 +1,11 @@
 import CartProductsListItem from 'components/CartProductsListItem/CartProductsListItem'
-import productsArray, { getProductsObject, Product } from 'utils/productsArray'
+import { useAppSelector } from 'redux/hooks'
+import { getProductsObject, Product } from 'utils/productsArray'
 
+type ProductsObject = {
+    [id: number]: Product
+}
 type Props = {
-    productsObject?: { [id: number]: Product }
     CartItem?: any
     productsInCart: {
         [id: number]: number
@@ -10,10 +13,12 @@ type Props = {
 }
 
 const CartProductsList = ({
-    productsObject = getProductsObject(productsArray),
     CartItem = CartProductsListItem,
     productsInCart,
 }: Props) => {
+    const products = useAppSelector((state) => state.products)
+    const productsObject: ProductsObject = getProductsObject(products)
+
     return (
         <>
             {productsInCart

@@ -1,8 +1,10 @@
 import { Grid, Typography } from '@mui/material'
 import ProductListItem from './ProductListItem'
-import productsArray from 'utils/productsArray'
+import { useAppSelector } from 'redux/hooks'
 
 const ProcutsList = () => {
+    const products = useAppSelector((state) => state.products)
+
     return (
         <>
             <Typography
@@ -15,17 +17,25 @@ const ProcutsList = () => {
             </Typography>
 
             <Grid container spacing={4}>
-                {productsArray.map(
-                    ({ name, type, capacity, desc, price, id, image }) => {
-                        console.log(desc)
+                {products.map(
+                    ({
+                        title: title,
+                        type,
+                        capacity,
+                        description,
+                        price,
+                        id,
+                        image,
+                    }) => {
+                      
                         return (
                             <Grid item xs={12} md={4} key={id}>
                                 <ProductListItem
                                     id={id}
                                     image={image}
-                                    name={name}
+                                    title={title}
                                     type={type}
-                                    desc={desc}
+                                    description={description}
                                     price={price}
                                     capacity={capacity}
                                 />
