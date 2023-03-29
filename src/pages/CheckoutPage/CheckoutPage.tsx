@@ -36,7 +36,10 @@ const CheckoutPage = (props: Props) => {
                     address: orderData.address,
                 },
             })
-            .then((res) => console.log(res.data.data.attributes))
+            .then((res) => {
+                console.log(res.data.data.attributes)
+                setIsOrderSent(true)
+            })
             /* .then(({ name, address }) => {
                 setorderData({
                     name,

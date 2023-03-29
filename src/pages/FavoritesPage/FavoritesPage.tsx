@@ -16,7 +16,7 @@ type Props = {
     }
 }
 
-const FavoritesPage = ({}: Props) => {
+const FavoritesPage = (props: Props) => {
 
     const products = useAppSelector((state) => state.products)
     const productsObject: ProductsObject = getProductsObject(products)

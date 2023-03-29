@@ -19,7 +19,7 @@ const ProcutsList = () => {
             <Grid container spacing={4}>
                 {products.map(
                     ({
-                        title: title,
+                        title,
                         type,
                         capacity,
                         description,
