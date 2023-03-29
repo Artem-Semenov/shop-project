@@ -14,15 +14,16 @@ const CartTotal = ({ productsInCart }: Props) => {
     const products = useAppSelector((state) => state.products)
     const productsObject: ProductsObject = getProductsObject(products)
 
+    const {currency, coefficient} = useAppSelector(state => state.currency)
     return (
         <div>
-            Total: $
+            Total: {currency + ' '}
             {productsInCart
                 ? Object.keys(productsInCart).reduce((acc, el) => {
                       return (
-                          acc +
+                          (acc +
                           productsObject[parseInt(el)].price *
-                          productsInCart[parseInt(el)]
+                          productsInCart[parseInt(el)]) * coefficient
                       )
                   }, 0)
                 : ''}

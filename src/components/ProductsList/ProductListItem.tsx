@@ -45,6 +45,10 @@ const ProductListItem = ({
 
     const isLiked = useAppSelector((state) => state.productsLike[id])
 
+    const {currency, coefficient} = useAppSelector(state => state.currency);
+
+    console.log(currency)
+
     const dispatch = useAppDispatch()
 
     return (
@@ -64,7 +68,7 @@ const ProductListItem = ({
                 <div className="product-desc">{description}</div>
                 <div className="product-features">Type: {type}</div>
                 <div className="product-features">Capacity: {capacity}gb</div>
-                <div className="product-price">Price: {price}$</div>
+                <div className="product-price">Price: {price * coefficient}{currency}</div>
                 <Quantity
                     onIncrement={onIncrement}
                     onDecrement={onDecrement}
